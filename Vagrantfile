@@ -1,5 +1,5 @@
 Vagrant.configure("2") do |config|
-  config.vm.box = "generic/centos9s"
+  config.vm.box = "rockylinux/9"
   config.vm.provider "virtualbox" do |v|
     v.memory = 256
     v.cpus = 1
