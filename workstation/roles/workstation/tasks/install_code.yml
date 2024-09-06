@@ -1,0 +1,18 @@
+---
+- name: 'Code : Ensure yum repos path exists'
+  file:
+    path: "{{ yum_repos_path }}"
+    state: directory
+  when: ansible_os_family == "RedHat"
+
+- name: 'Code : Install repos files'
+  copy:
+    src: "{{ item }}"
+    dest: "{{ yum_repos_path }}/{{ item | basename }}"
+  with_fileglob: '*.repo'
+  when: ansible_os_family == "RedHat"
+
+- name: 'Code : Install packages'
+  package:
+    name:
+      - code

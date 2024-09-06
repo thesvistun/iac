@@ -1,0 +1,25 @@
+---
+- name: 'jEdit : Ensure home path exists'
+  file:
+    path: "{{ jedit_home_path }}"
+    state: directory
+  become: false
+
+- name: 'jEdit : Install config file'
+  copy:
+    src: "{{ item }}"
+    dest: "{{ jedit_home_path }}/{{ item | basename }}"
+  with_fileglob: 'jedit/*'
+  become: false
+
+- name: 'jEdit : Install packages'
+  package:
+    name:
+      - jedit
+
+- name: 'jEdit : Set to scale window properly'
+  lineinfile:
+    path: /usr/bin/jedit
+    regex: ^(exec "\${JAVA}" \${ANTIALIAS_ALL})\s+(-jar .+)
+    line: \g<1> -Dsun.java2d.uiScale=2.0 \g<2>
+    backrefs: yes

@@ -1,0 +1,6 @@
+---
+- name: 'Packages : Import tasks to install VS Code'
+  import_tasks: install_code.yml
+
+- name: 'Packages : Import tasks to install Jedit'
+  import_tasks: install_jedit.yml
