@@ -1,0 +1,3 @@
+---
+- name: Import tasks to manage packages
+  import_tasks: packages.yml
